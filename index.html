@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>24H Key Generator</title>
+  <style>
+    body {
+      background: #0f172a;
+      color: white;
+      font-family: Arial;
+      text-align: center;
+      padding-top: 100px;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 18px;
+      background: #5865F2;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+    }
+
+    #keyBox {
+      margin-top: 30px;
+      font-size: 22px;
+      background: #1e293b;
+      padding: 15px;
+      border-radius: 8px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🔑 24 Hour Key Generator</h1>
+  <button onclick="generateKey()">Generate Key</button>
+
+  <div id="keyBox" style="display:none;"></div>
+
+  <script>
+    function generateKey() {
+      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+      let key = "";
+
+      for (let i = 0; i < 16; i++) {
+        key += chars[Math.floor(Math.random() * chars.length)];
+        if ((i + 1) % 4 === 0 && i !== 15) key += "-";
+      }
+
+      const box = document.getElementById("keyBox");
+      box.innerText = key;
+      box.style.display = "block";
+
+      // OPTIONAL: Send key to your backend API
+      /*
+      fetch("https://YOUR_BACKEND_URL/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ key: key })
+      });
+      */
+    }
+  </script>
+
+</body>
+</html>
